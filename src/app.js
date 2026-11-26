@@ -41,3 +41,12 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`Server berjalan di http://localhost:${PORT}`);
 });
+
+// Jalankan server lokal hanya saat tidak berjalan di Vercel
+if (!process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`Server berjalan di http://localhost:${PORT}`);
+    });
+}
+
+export default app;
