@@ -1,6 +1,6 @@
 # Expense Tracker API
 
-Expense Tracker API adalah sebuah RESTful API untuk pencatatan pemasukan dan pengeluaran pribadi.
+Expense Tracker API adalah sebuah RESTful API untuk pencatatan pemasukan dan pengeluaran pribadi. Project ini dibuat untuk memenuhi penugasan Backend OmahTI.
 
 ## URL Deployment
 
