@@ -12,6 +12,7 @@ Expense Tracker API adalah sebuah RESTful API untuk pencatatan pemasukan dan pen
 - **Database:** PostgreSQL (Supabase)
 - **Security & Auth:** JWT (`jsonwebtoken`), `bcrypt`, `helmet`, `express-rate-limit`, `cors`
 - **Deployment:** Vercel
+- **API Testing & Documentation:** Postman
 
 ---
 
