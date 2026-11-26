@@ -57,7 +57,7 @@ CREATE TABLE transactions (
    Salin `.env.example` menjadi `.env`, lalu isi variabel berikut:
    ```env
    PORT=3000
-   DATABASE_URL=postgresql://user:password@host:5432/database_name
+   DATABASE_URL=your_database_url
    JWT_SECRET=your_jwt_secret_key
    ```
 
