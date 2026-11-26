@@ -69,26 +69,25 @@ CREATE TABLE transactions (
 
 ## Dokumentasi API & Postman
 
-File koleksi Postman siap pakai tersedia di root repositori: **`expense-tracker.postman_collection.json`**.  
 Untuk endpoint dengan status **Auth: Ya**, sertakan header:
-`Authorization: Bearer <token_jwt>`
+`Authorization: Bearer <token_jwt>` (pada Postman Collection menggunakan variabel `{{json_web_token_02sl}}`).
 
 ### 1. Authentication & User
 
-| Method | Endpoint | Deskripsi | Auth |
-| :--- | :--- | :--- | :---: |
-| `POST` | `/api/auth/register` | Registrasi pengguna baru | Tidak |
-| `POST` | `/api/auth/login` | Login & mendapatkan token JWT | Tidak |
-| `GET` | `/api/auth/profile` | Melihat profil & batas budget pengguna | Ya |
-| `PATCH` | `/api/auth/budget` | Mengatur batas `monthly_budget` | Ya |
+Request Name | Method | Endpoint | Deskripsi | Auth |
+| :--- | :--- | :--- | :--- | :---: |
+| **Register** | `POST` | `/api/auth/register` | Registrasi pengguna baru | Tidak |
+| **Login** | `POST` | `/api/auth/login` | Login & mendapatkan token JWT | Tidak |
+| **Profile** | `GET` | `/api/auth/profile` | Melihat profil pengguna | Ya |
+| **Budget** | `PATCH` | `/api/auth/budget` | Mengatur batas `monthly_budget` | Ya |
 
-**`POST /api/auth/register`**
+**1. Register (`POST /api/auth/register`)**
 - **Request Body:**
   ```json
   {
-    "name": "Alaniz",
-    "email": "alaniz@mail.com",
-    "password": "password123"
+    "name": "Amogus Skibidi",
+    "email": "testing123@mail.com",
+    "password": "112123"
   }
   ```
 - **Response (`201 Created`):**
@@ -97,18 +96,18 @@ Untuk endpoint dengan status **Auth: Ya**, sertakan header:
     "message": "Registrasi berhasil",
     "user": {
       "id": 1,
-      "name": "Alaniz",
-      "email": "alaniz@mail.com"
+      "name": "Amogus Skibidi",
+      "email": "testing123@mail.com"
     }
   }
   ```
 
-**`POST /api/auth/login`**
+**2. Login (`POST /api/auth/login`)**
 - **Request Body:**
   ```json
   {
-    "email": "alaniz@mail.com",
-    "password": "password123"
+    "email": "testing123@mail.com",
+    "password": "112123"
   }
   ```
 - **Response (`200 OK`):**
@@ -119,18 +118,18 @@ Untuk endpoint dengan status **Auth: Ya**, sertakan header:
   }
   ```
 
-**`GET /api/auth/profile`**
+**3. Profile (`GET /api/auth/profile`)**
 - **Response (`200 OK`):**
   ```json
   {
     "id": 1,
-    "name": "Alaniz",
-    "email": "alaniz@mail.com",
+    "name": "Amogus Skibidi",
+    "email": "testing123@mail.com",
     "monthly_budget": "1500000.00"
   }
   ```
 
-**`PATCH /api/auth/budget`**
+**4. Budget (`PATCH /api/auth/budget`)**
 - **Request Body:**
   ```json
   {
@@ -149,20 +148,20 @@ Untuk endpoint dengan status **Auth: Ya**, sertakan header:
 
 ### 2. Transactions & Summary
 
-| Method | Endpoint | Deskripsi | Auth |
-| :--- | :--- | :--- | :---: |
-| `POST` | `/api/transactions` | Tambah transaksi & hitung sisa budget | Ya |
-| `GET` | `/api/transactions` | List transaksi (query opsional: `?type=income` / `?type=expense`) | Ya |
-| `GET` | `/api/transactions/summary` | Ringkasan pemasukan, pengeluaran, saldo & sisa budget | Ya |
-| `PUT` | `/api/transactions/:id` | Perbarui transaksi berdasarkan ID | Ya |
-| `DELETE` | `/api/transactions/:id` | Hapus transaksi berdasarkan ID | Ya |
+| Request Name | Method | Endpoint | Deskripsi | Auth |
+| :--- | :--- | :--- | :--- | :---: |
+| **Add Transaction** | `POST` | `/api/transactions` | Tambah transaksi (income / expense) & hitung sisa budget | Ya |
+| **Get Transaction** | `GET` | `/api/transactions` | List semua transaksi | Ya |
+| **Get Summary** | `GET` | `/api/transactions/summary` | Ringkasan pemasukan, pengeluaran, saldo & sisa budget | Ya |
+| **Modify Transaction** | `PUT` | `/api/transactions/:id` | Perbarui transaksi berdasarkan ID | Ya |
+| **Delete Transaction** | `DELETE` | `/api/transactions/:id` | Hapus transaksi berdasarkan ID | Ya |
 
-**`POST /api/transactions`**
+**1. Add Transaction (`POST /api/transactions`)**
 - **Request Body:**
   ```json
   {
-    "title": "Makan Siang",
-    "amount": 25000,
+    "title": "Nasi Ayam Pak Sip",
+    "amount": 20000,
     "type": "expense",
     "category": "Makanan",
     "date": "2026-11-26"
@@ -173,26 +172,26 @@ Untuk endpoint dengan status **Auth: Ya**, sertakan header:
   {
     "message": "Transaksi berhasil ditambahkan",
     "transaction": {
-      "id": 1,
-      "title": "Makan Siang",
-      "amount": "25000.00",
+      "id": 7,
+      "title": "Nasi Ayam Pak Sip",
+      "amount": "20000.00",
       "type": "expense",
       "category": "Makanan",
       "date": "2026-11-26"
     },
-    "remaining_budget": 1475000
+    "remaining_budget": 1480000
   }
   ```
 
-**`GET /api/transactions`**
+**2. Get Transaction (`GET /api/transactions`)**
 - **Response (`200 OK`):**
   ```json
   {
     "transactions": [
       {
-        "id": 1,
-        "title": "Makan Siang",
-        "amount": "25000.00",
+        "id": 7,
+        "title": "Nasi Ayam Pak Sip",
+        "amount": "20000.00",
         "type": "expense",
         "category": "Makanan",
         "date": "2026-11-26"
@@ -201,41 +200,41 @@ Untuk endpoint dengan status **Auth: Ya**, sertakan header:
   }
   ```
 
-**`GET /api/transactions/summary`**
+**3. Get Summary (`GET /api/transactions/summary`)**
 - **Response (`200 OK`):**
   ```json
   {
     "total_income": 50000,
-    "total_expense": 25000,
-    "balance": 25000,
+    "total_expense": 20000,
+    "balance": 30000,
     "budget": {
       "monthly_budget": 1500000,
-      "spent_this_month": 25000,
-      "remaining_budget": 1475000
+      "spent_this_month": 20000,
+      "remaining_budget": 1480000
     }
   }
   ```
 
-**`PUT /api/transactions/:id`**
+**4. Modify Transaction (`PUT /api/transactions/7`)**
 - **Request Body:**
   ```json
   {
-    "title": "Makan Siang & Minum",
-    "amount": 30000,
+    "title": "Nasi Ayam Pak Sip",
+    "amount": 13000,
     "type": "expense",
     "category": "Makanan",
-    "date": "2026-11-26"
+    "date": "2026-11-25"
   }
   ```
 - **Response (`200 OK`):**
   ```json
   {
     "message": "Transaksi berhasil diperbarui",
-    "remaining_budget": 1470000
+    "remaining_budget": 1487000
   }
   ```
 
-**`DELETE /api/transactions/:id`**
+**5. Delete Transaction (`DELETE /api/transactions/4`)**
 - **Response (`200 OK`):**
   ```json
   {
